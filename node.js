@@ -1,58 +1,66 @@
-//var process = require('process');
-var readline = require('readline');
-
-var randomNumber = Math.round(Math.random() * 10);
-var lives = 5;
-
-var terminal = readline.createInterface(
-{
-  input : process.stdin,
-  output : process.stdout
-});
-
-terminal.setPrompt('Guess the number! (0-10): ');
-terminal.prompt();
-terminal.on('line', function(answer)
-{
-  var answerNum = parseInt(answer);
-
-  if (answerNum > randomNumber)
-  {
-    console.log('Too high!');
-    console.log('You have '+lives+' lives left');
-  }
-
-  else if (answerNum < randomNumber)
-  {
-    console.log('Too low!');
-    console.log('You have '+lives+' lives left');
-  }
-
-  else if (answerNum === randomNumber)
-  {
-    console.log('W I N N E R ! ! !');
-    console.log('You lost only '+ (6-lives) + ' lives');
-    process.exit(0);
-  }
-
-  else
-  {
-    console.log("That wasn't a number I recognise");
-    console.log('You have '+lives+' lives');
-  }
-
-  lives--;
-  if (lives == 0)
-  {
-    console.log('G A M E  O V E R ! ! !');
-    process.exit(0);
-  }
-
-  terminal.prompt();
-});
-
-terminal.on('close', function()
-{
-  console.log('C H I C K E N :P')
-  process.exit(1);
-});
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Number Guessing Game</title>
+  
+    <style>
+        html {
+    font-family: sans-serif;
+    }
+      
+        body {
+    width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin: 0 auto;
+    }
+    </style>
+</head>
+  
+<body>
+<h1>Guess The Number</h1>
+  
+<p>We have selected a random number between 1 - 10. 
+See if you can guess it.</p>
+  
+<div class="form">
+    <label for="guessField">Enter a guess: </label>
+    <input type = "text" id = "guessField" class = "guessField">
+    <input type = "submit" value = "Submit guess" 
+           class = "guessSubmit" id = "submitguess">
+</div>
+  
+<script type = "text/javascript">
+  
+    // random value generated
+    var y = Math.floor(Math.random() * 10 + 1);
+      
+    // counting the number of guesses
+    // made for correct Guess
+    var guess = 1;
+      
+    document.getElementById("submitguess").onclick = function(){
+      
+   // number guessed by user     
+   var x = document.getElementById("guessField").value;
+  
+   if(x == y)
+   {    
+       alert("CONGRATULATIONS!!! YOU GUESSED IT RIGHT IN "
+               + guess + " GUESS ");
+   }
+   else if(x > y) /* if guessed number is greater
+                   than actual number*/ 
+   {    
+       guess++;
+       alert("OOPS SORRY!! TRY A SMALLER NUMBER");
+   }
+   else
+   {
+       guess++;
+       alert("OOPS SORRY!! TRY A GREATER NUMBER")
+   }
+}
+</script>
+</body>
+</html>                
